@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>
+			skyward.link :: present from anywhere
+		</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+		<script src="https://cdn.socket.io/socket.io-1.3.4.js"></script>
+		<script src="https://static.skyward.link/index.js"></script>
+		<script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+
+		<style>
+			@import url(https://static.skyward.link/index.css);
+		</style>
+	</head>
+
+	<body>
+		<div id="driveViewContainer">
+			<div id="connectLinkDiv">
+				<a href="#" id="connectLink">Connect with Google Drive<img src="https://static.skyward.link/images/loader.gif" width="16" height="16" alt="Loading" id="loaderGif"></a>
+			</div>
+			<div id="error">
+			</div>
+			<div id="presentationListDiv">
+				<ul id="presentationList">
+				</ul>
+			</div>
+		</div>
+		
+		<div id="slugView">
+			<div id="slugViewPadding">
+				<div id="slugDirections">
+					On your presentation computer, navigate to
+				</div>
+				<div id="slug">
+				</div>
+			</div>
+		</div>
+
+		<div id="clickerControls">
+			<button id="backButton">
+				Back
+			</button>
+			<button id="nextButton">
+				Next
+			</button>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,114 @@
+body {
+	font-size: 13px;
+	font-family: Arial, sans-serif;
+}
+
+#connectLink, #presentationList li a {
+	display: block;
+	padding: .75em;
+
+	text-decoration: none;
+	font-weight: bold;
+
+	color: white;
+	background-color: #4285f4;
+
+}
+
+#connectLink {
+	text-align: center;
+	border: 1px solid #1266f1;
+}
+
+#connectLink:hover {
+	background: #4d4d4d;
+	color: white;
+	border: 1px solid #3c3c3c;
+}
+
+#loaderGif {
+	margin-left: .75em;
+}
+
+#error {
+	display: none;
+	color: #c00;
+}
+
+#presentationList {
+	list-style-type: none;
+	display: block;
+
+	margin: 0;
+	padding: 0;
+}
+
+#presentationList li.disabled a {
+	color: black;
+	background-color: #f0f0f0;
+}
+
+@media (min-width: 601px) {
+	#connectLinkDiv, #presentationList {
+		width: 350px;
+	}
+
+	#presentationList li a:hover {	/* looks awkward on mobile */
+		background: #4d4d4d;
+		color: white;
+	}
+}
+
+@media (max-width: 600px) {
+	#connectLinkDiv,  #presentationList {
+		width: 100%;
+	}
+	#presentationList li a {
+		padding-top: 8%;
+		padding-bottom: 8%;
+	}
+	#presentationList li a:active {
+		background: #4d4d4d;
+		color: white;
+	}
+}
+
+#slugView {
+	display: none;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	text-align: center;
+	font-size: 18pt;
+	font-size: 4vw;
+}
+
+#slugViewPadding {
+	margin: 20px;
+}
+
+#slug {
+	font-weight: bold;
+	font-size: 24pt;
+	font-size: 6vw;
+}
+
+#clickerControls {
+	display: none;
+}
+
+#backButton {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 50%;
+	height: 100%;
+}
+
+#nextButton {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 50%;
+	height: 100%;
+}
