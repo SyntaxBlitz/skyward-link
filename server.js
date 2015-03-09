@@ -77,10 +77,11 @@ function retrievalHandler(request, response) {
 		}
 	} else if (request.url == "/slugData") {
 		response.writeHead(200, {
-			"Access-Control-Allow-Origin": "https://skyward.link",
-			"Content-Type": "text/javascript"
+			"Access-Control-Allow-Origin": "https://docs.google.com",
+			"Access-Control-Allow-Credentials": "true",	// I should hope so
+			"Content-Type": "text/plain"
 		});
-		response.end("var skywardLinkCookies = \"" + request.headers.cookie + "\"");	// potential XSS? I think not, because cookies are supposed to be URL encoded. also, you need to set skywardlink cookies in the first place. and this page is accessed over HTTPS.
+		response.end(request.headers.cookie);
 	} else {
 		response.writeHead(404, headers);
 		response.end("404-3");

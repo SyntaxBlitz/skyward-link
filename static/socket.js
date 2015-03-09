@@ -1,32 +1,35 @@
 (
 	function () {
-		var slugDataScriptElement = document.createElement("script");
-		slugDataScriptElement.src = "https://skyward.link:6001/slugData";
+		var slugDataXMLHttpRequest = new XMLHttpRequest();
+		slugDataXMLHttpRequest.withCredentials = true;	// sends cookies along, which is kind of the point
+		slugDataXMLHttpRequest.open("get", "https://skyward.link:6001/slugData");
 
 		var socketIOScriptElement = document.createElement("script");
 		socketIOScriptElement.src = "https://cdn.socket.io/socket.io-1.3.4.js";
 
-		var loadedScripts = 0;
-		var numScripts = 2;
+		var loadedParts = 0;
+		var numParts = 2;
 
-		slugDataScriptElement.onload = function () {
-			loadedScripts++;
-			if (loadedScripts == numScripts)
+		var skywardLinkCookies;
+
+		slugDataXMLHttpRequest.onload = function () {	// TODO: check for 404/error
+			skywardLinkCookies = this.responseText;
+			loadedParts++;
+			if (loadedParts == numParts)
 				initialiseSocket();
 		}
 
 		socketIOScriptElement.onload = function () {
-			loadedScripts++;
-			if (loadedScripts == numScripts)
+			loadedParts++;
+			if (loadedParts == numParts)
 				initialiseSocket();
 		};
 
-		document.body.appendChild(slugDataScriptElement);
+		slugDataXMLHttpRequest.send();
 		document.body.appendChild(socketIOScriptElement);
 
 		var initialiseSocket = function () {
 			var socket = io('https://skyward.link:6001', {secure: true});
-			console.log(skywardLinkCookies);
 
 			var slug = skywardLinkCookies.match(/slug=([A-Za-z]+)/)[1];
 			var code = skywardLinkCookies.match(/code=(0\.\d+)/)[1];
