@@ -68,12 +68,12 @@ function retrievalHandler(request, response) {
 				response.writeHead(200, headers);
 				response.end(slugMatches[slug].url);
 			} else {
-				response.writeHead(404, headers);
-				response.end("404-1");				
+				response.writeHead(409, headers);
+				response.end("already requested");				
 			}
 		} else {
-			response.writeHead(404, headers);
-			response.end("404-2");
+			response.writeHead(401, headers);
+			response.end("malformed request");
 		}
 	} else if (request.url == "/slug-data") {
 		response.writeHead(200, {
@@ -82,9 +82,9 @@ function retrievalHandler(request, response) {
 			"Content-Type": "text/plain"
 		});
 		response.end(request.headers.cookie);
-	} else {
-		response.writeHead(404, headers);
-		response.end("404-3");
+	} else {	// server config should only allow this if they request /get-url with no parameters
+		response.writeHead(401, headers);
+		response.end("malformed request");
 	}
 };
 
