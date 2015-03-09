@@ -39,7 +39,6 @@
 			});
 
 			socket.on("keypress", function (data) {
-				console.log("keypress :)");
 				var ev = document.createEvent("Events");
 				ev.initEvent("keydown", true, true);
 				ev.keyCode = data;
