@@ -137,7 +137,7 @@ var connectPresentation = function (presentation) {
 	var url = presentation.link;
 	var slug;
 
-	socket = io("https://skyward.link:6001", {secure: true});
+	socket = io("https://skyward.link", {secure: true});
 	socket.on("connect", function () {
 		socket.emit("clicker connected", url, function (response) {
 			showSlug(response);

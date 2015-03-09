@@ -32,6 +32,6 @@ window.onload = function () {
 			console.log("error :(");
 		}
 	};
-	xmlHttpRequest.open("get", "https://skyward.link:6001/getUrl?slug=" + slug + "&code=" + code);
+	xmlHttpRequest.open("get", "https://skyward.link/get-url?slug=" + slug + "&code=" + code);
 	xmlHttpRequest.send();
 }

@@ -2,7 +2,7 @@
 	function () {
 		var slugDataXMLHttpRequest = new XMLHttpRequest();
 		slugDataXMLHttpRequest.withCredentials = true;	// sends cookies along, which is kind of the point
-		slugDataXMLHttpRequest.open("get", "https://skyward.link:6001/slugData");
+		slugDataXMLHttpRequest.open("get", "https://skyward.link/slug-data");
 
 		var socketIOScriptElement = document.createElement("script");
 		socketIOScriptElement.src = "https://cdn.socket.io/socket.io-1.3.4.js";
@@ -29,7 +29,7 @@
 		document.body.appendChild(socketIOScriptElement);
 
 		var initialiseSocket = function () {
-			var socket = io('https://skyward.link:6001', {secure: true});
+			var socket = io('https://skyward.link', {secure: true});
 
 			var slug = skywardLinkCookies.match(/slug=([A-Za-z]+)/)[1];
 			var code = skywardLinkCookies.match(/code=(0\.\d+)/)[1];

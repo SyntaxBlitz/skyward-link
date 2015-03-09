@@ -56,8 +56,8 @@ function retrievalHandler(request, response) {
 		"Access-Control-Allow-Origin": "https://skyward.link"
 	};
 
-	if (request.url.substring(0, 8) == "/getUrl?") {
-		var bits = request.url.substring(8).split("&");
+	if (request.url.substring(0, 9) == "/get-url?") {
+		var bits = request.url.substring(9).split("&");
 		if (bits[0].substring(0, 5) == "slug=" && bits[1].substring(0, 5) == "code=") {
 			var slug = bits[0].substring(5).toLowerCase();
 			var code = bits[1].substring(5);
@@ -75,7 +75,7 @@ function retrievalHandler(request, response) {
 			response.writeHead(404, headers);
 			response.end("404-2");
 		}
-	} else if (request.url == "/slugData") {
+	} else if (request.url == "/slug-data") {
 		response.writeHead(200, {
 			"Access-Control-Allow-Origin": "https://docs.google.com",
 			"Access-Control-Allow-Credentials": "true",	// I should hope so
