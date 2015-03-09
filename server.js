@@ -11,18 +11,19 @@ io.on('connection', function (socket) {
 	// CLICKER EVENTS
 	socket.on("clicker connected", function (data, callback) {
 		var slug = generateSlug();
-		slugMatches[slug] = {
+		slugMatches[slug.toLowerCase()] = {
 			url: data,
 			code: null,
 			clickerSocket: socket,
 			presenterSocket: null
 		};
 
-		callback(slug);
+		callback(slug);	// display it with normal case, even though we store it in lowercase
 	});
 
 	socket.on("click", function (data) {
-		if (slugMatches[data.slug] !== undefined && slugMatches[data.slug].clickerSocket === socket) {	// make sure the correct person is sending this message
+		var slug = data.slug.toLowerCase();
+		if (slugMatches[slug] !== undefined && slugMatches[slug].clickerSocket === socket) {	// make sure the correct person is sending this message
 			var keyCode;
 			if (data.action === "back") {
 				keyCode = 37;
@@ -30,20 +31,22 @@ io.on('connection', function (socket) {
 				keyCode = 39;
 			}
 
-			slugMatches[data.slug].presenterSocket.emit("keypress", keyCode);
+			slugMatches[slug].presenterSocket.emit("keypress", keyCode);
 		}
 	});
 
 	// PRESENTER EVENTS
 	socket.on("presenter connected", function (data) {
-		if (slugMatches[data.slug] !== undefined && slugMatches[data.slug].code === data.code) { // awesome authentication man. I wonder if there are computer security conferences where I can show this shit off
-			slugMatches[data.slug].presenterSocket = socket;
+		var slug = data.slug.toLowerCase();
+		if (slugMatches[slug] !== undefined && slugMatches[slug].code === data.code) { // awesome authentication man. I wonder if there are computer security conferences where I can show this shit off
+			slugMatches[slug].presenterSocket = socket;
 		}
 	});
 
 	socket.on("presentation state changed", function (data) {
-		if (slugMatches[data.slug] !== undefined && slugMatches[data.slug].code === data.code) {
-			slugMatches[data.slug].clickerSocket.emit("presentation state changed", data.state);
+		var slug = data.slug.toLowerCase();
+		if (slugMatches[slug] !== undefined && slugMatches[slug].code === data.code) {
+			slugMatches[slug].clickerSocket.emit("presentation state changed", data.state);
 		}
 	});
 });
@@ -56,7 +59,7 @@ function retrievalHandler(request, response) {
 	if (request.url.substring(0, 8) == "/getUrl?") {
 		var bits = request.url.substring(8).split("&");
 		if (bits[0].substring(0, 5) == "slug=" && bits[1].substring(0, 5) == "code=") {
-			var slug = bits[0].substring(5);
+			var slug = bits[0].substring(5).toLowerCase();
 			var code = bits[1].substring(5);
 
 			if (slugMatches[slug] !== undefined && slugMatches[slug].code == null) { // the slug is entered but hasn't yet connected with a client
