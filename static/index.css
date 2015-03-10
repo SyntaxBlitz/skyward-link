@@ -97,18 +97,23 @@ body {
 	display: none;
 }
 
-#backButton {
+#backButton, #nextButton {
 	position: absolute;
 	top: 0;
-	left: 0;
 	width: 50%;
 	height: 100%;
+
+	border: none;
+	font-size: 10vw;
+	font-weight: bold;
+}
+
+#backButton {
+	left: 0;
+	background-color: #FFA8A8;
 }
 
 #nextButton {
-	position: absolute;
-	top: 0;
 	right: 0;
-	width: 50%;
-	height: 100%;
+	background-color: #B3FF99;
 }
