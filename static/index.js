@@ -161,6 +161,14 @@ var connectPresentation = function (presentation) {
 	document.getElementById("nextButton").onclick = function () {
 		socket.emit("click", {action: "next", slug: slug});
 	};
+
+	document.body.onkeydown = function (event) {
+		if (event.keyCode == 37) {
+			socket.emit("click", {action: "back", slug: slug});
+		} else if (event.keyCode == 39) {
+			socket.emit("click", {action: "next", slug: slug});
+		}
+	};
 };
 
 var showSlug = function (slug) {
