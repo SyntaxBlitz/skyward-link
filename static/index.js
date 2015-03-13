@@ -165,6 +165,8 @@ var connectPresentation = function (presentation) {
 
 var showSlug = function (slug) {
 	document.getElementById("driveViewContainer").style.display = "none";
+	document.getElementById("skywardIntro").style.display = "none";
+	document.getElementById("mobileHeader").style.display = "none";
 
 	document.getElementById("slug").innerHTML = "skyward.link/" + slug;
 
@@ -174,4 +176,19 @@ var showSlug = function (slug) {
 window.onload = function () {
 	var connectLink = document.getElementById("connectLink");
 	connectLink.onclick = handleConnectLinkClick;
+
+	var expandedHeader = false;
+	document.getElementById("mobileHeader").onclick = function () {
+		if (expandedHeader) {
+			document.getElementById("skywardIntro").style.left = "-640px";
+			document.getElementById("driveViewContainer").style.display = "block";
+			document.getElementById("expandButton").src = "https://static.skyward.link/images/ic_expand_more_black_18dp.png";
+		} else {
+			document.getElementById("skywardIntro").style.left = "0";
+			document.getElementById("driveViewContainer").style.display = "none";
+			document.getElementById("expandButton").src = "https://static.skyward.link/images/ic_expand_less_black_18dp.png";
+		}
+
+		expandedHeader = !expandedHeader;
+	};
 };

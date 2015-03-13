@@ -3,6 +3,16 @@ body {
 	font-family: Arial, sans-serif;
 }
 
+#mobileHeader {
+	font-weight: bold;
+	font-size: 7vh;
+}
+
+#mobileHeaderText {
+	margin: 3%;
+	text-align: center;
+}
+
 #connectLink, #presentationList li a {
 	display: block;
 	padding: .75em;
@@ -48,21 +58,68 @@ body {
 	background-color: #f0f0f0;
 }
 
+#driveViewContainer {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+#skywardIntro {
+	position: absolute;
+	padding: 20px;
+	top: 0;
+}
+
 @media (min-width: 601px) {
-	#connectLinkDiv, #presentationList {
+	#mobileHeader {
+		display: none;
+	}
+
+	#driveViewContainer {
 		width: 350px;
+	}
+	#connectLinkDiv, #presentationList {
+		margin: 17px;
+		width: 316px;
 	}
 
 	#presentationList li a:hover {	/* looks awkward on mobile */
 		background: #4d4d4d;
 		color: white;
 	}
+
+	#skywardIntro {
+		left: 350px;
+	}
 }
 
 @media (max-width: 600px) {
-	#connectLinkDiv,  #presentationList {
+	#mobileHeader {
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
 		width: 100%;
 	}
+
+	#expandButton {
+		position: absolute;
+		top: 50%;
+		right: 5%;
+		width: 36px;
+		height: 36px;
+		transform: translateY(-50%);
+	}
+
+	#driveViewContainer {
+		width: 100%;
+		top: 10%;
+	}
+	#connectLinkDiv, #presentationListDiv {
+		margin: 5%;
+		width: 90%;
+	}
+
 	#presentationList li a {
 		padding-top: 8%;
 		padding-bottom: 8%;
@@ -70,6 +127,15 @@ body {
 	#presentationList li a:active {
 		background: #4d4d4d;
 		color: white;
+	}
+
+	#skywardIntro {
+		width: 90%;
+		left: -640px;
+		height: 90%;
+		background-color: white;
+		top: 10%;
+		font-size: 18pt;
 	}
 }
 
