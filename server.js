@@ -22,6 +22,8 @@ io.on('connection', function (socket) {
 	});
 
 	socket.on("click", function (data) {
+		if (!data.slug)
+			return;
 		var slug = data.slug.toLowerCase();
 		if (slugMatches[slug] !== undefined && slugMatches[slug].clickerSocket === socket) {	// make sure the correct person is sending this message
 			var keyCode;
