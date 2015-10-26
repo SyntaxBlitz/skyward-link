@@ -5,6 +5,9 @@ var SCOPES = [
 
 var loadedPresentations = [];
 
+var stopwatchInterval = null;
+var stopwatchStartTime = -1;
+
 var handleClientLoad = function () {
 	console.log("client load being handled");
 	authorize(true);
@@ -149,8 +152,14 @@ var connectPresentation = function (presentation) {
 		if (isPresenting) {
 			document.getElementById("slugView").style.display = "none";
 			document.getElementById("clickerControls").style.display = "block";
+			stopwatchStartTime = +new Date();
+			var stopwatchInterval = window.setInterval(function () {
+				document.getElementById("stopwatch").innerHTML = formatStopwatch(+new Date() - stopwatchStartTime);
+			}, 10);
 		} else {
 			document.getElementById("clickerControls").style.display = "none";
+			stopwatchStartTime = -1;
+			window.clearInterval(stopwatchInterval);
 		}
 	});
 
@@ -180,6 +189,22 @@ var showSlug = function (slug) {
 
 	document.getElementById("slugView").style.display = "block";
 };
+
+var formatStopwatch = function(milliseconds) {
+	var minutes = Math.floor(milliseconds / 60000);
+	var milliseconds = milliseconds % 60000;
+
+	var seconds = milliseconds / 1000;
+
+	if (seconds < 10) {
+		var seconds = "0" + seconds;	// dynamic typing hehehehe
+	}
+	while (("" + seconds).length < 6) {
+		seconds += "0";
+	}
+
+	return minutes + ":" + seconds;
+}
 
 window.onload = function () {
 	var connectLink = document.getElementById("connectLink");
